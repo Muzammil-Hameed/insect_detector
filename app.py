@@ -42,9 +42,9 @@ def predict_insect(image_path):
 
 
 # Routes
-@app.route("/")
+@app.route('/')
 def home():
-    return render_template("index.html")
+    return 'Insect Detector is Live!'
 
 @app.route("/predict", methods=["POST"])
 def predict():

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insect Detection System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-200 min-h-screen flex items-center justify-center p-6">
+
+  <div class="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl fade-in">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-green-700 mb-8">Insect Detection System</h1>
+
+    <!-- Upload Form -->
+    <form method="POST" action="/predict" enctype="multipart/form-data" class="space-y-6">
+      <div>
+        <label class="block text-gray-700 text-lg font-medium mb-2">Upload an image</label>
+        <input type="file" name="file" accept="image/*" required
+          class="w-full text-sm text-gray-800 border border-gray-300 rounded-xl shadow-sm bg-gray-50 p-3 focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit"
+          class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+          Detect Insect
+        </button>
+      </div>
+    </form>
+
+    <!-- Error Message -->
+    {% if error %}
+    <div class="mt-6 text-red-600 font-semibold text-center text-lg">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- Uploaded Image -->
+    {% if filename %}
+    <div class="mt-10 text-center">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Uploaded Image</h2>
+      <img src="{{ url_for('static', filename='uploads/' + filename) }}" 
+        alt="Uploaded Image"
+        class="mx-auto w-64 h-64 object-cover rounded-2xl border-4 border-green-300 shadow-md transition-all hover:scale-105 duration-300" />
+    </div>
+    {% endif %}
+
+    <!-- Prediction Result -->
+    {% if label %}
+    <div class="mt-8 text-center bg-green-50 p-6 rounded-xl shadow-md">
+      <h3 class="text-xl font-semibold text-gray-700">AI Prediction</h3>
+      <p class="text-3xl text-green-700 font-bold mt-2">{{ label }}</p>
+      <p class="text-sm text-gray-500 mt-1">Confidence: {{ confidence }}%</p>
+    </div>
+    {% endif %}
+
+    <!-- Footer -->
+    <p class="mt-12 text-center text-xs text-gray-400">
+      Built with ❤️ by <strong>Muzammil</strong> • Powered by AI
+    </p>
+  </div>
+</body>
+</html>

@@ -21,7 +21,6 @@ pyasn1-modules==0.2.8
 pyls-spyder==0.4.0
 PyQt5==5.15.10
 PyQtWebEngine==5.15.6
-pywin32==305.1
 setuptools==75.1.0
 tensorboard==2.19.0
 tensorboard-data-server==0.7.2
